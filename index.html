@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Digital Marketing Agency & Interactive Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .main-container {
+            padding: 20px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .award {
+            color: blue;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 36px;
+            text-align: center;
+        }
+
+        .description {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        #contactUsButton {
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .image img {
+            max-width: 70%;
+            height: auto;
+        }
+
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.4); 
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input, textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px;
+            background-color: #321ee9;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .services-container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .services-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .service-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .service-slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        .service-content {
+            padding: 20px;
+        }
+
+        .service-content h2 {
+            color: blue;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .service-content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .service-content p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: blue;;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .slider-nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .slider-nav button {
+            background-color: #1e65e9;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .slider-nav button:focus {
+            outline: none;
+        }
+
+        .content-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .image-section {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+        }
+
+        .content {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .content-item {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .content-item.active {
+            background-color: blue;
+            color: white;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            font-size: 2em;
+            color: #3c4ae7;
+        }
+
+        .number {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .label {
+            color: #777;
+        }
+        .feedback {
+            padding: 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .feedback h3 {
+            color: #3c94e7;
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .feedback h2 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+
+        .feedback p {
+            margin: 10px 0;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            background-color: #2b62c0;
+            padding: 20px 0;
+        }
+
+        .logos img {
+            margin: 0 10px;
+            height: 50px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            background-color: #f0f0f0;
+            padding: 20px 0;
+        }
+
+        .stat {
+            margin: 0 20px;
+        }
+
+        .stat h2 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .stat p {
+            margin: 5px 0 0;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="container">
+            <div class="content">
+                <h2 class="award">AWARD WINNING</h2>
+                <h1 class="title">DIGITAL MARKETING AGENCY</h1>
+                <p class="description">Morbi sed lacus nec risus finibus feugiat at fermentum nibh. Pellentesque vitae ante at elit fringilla acc at purus, Morbi sed lacus nec risus finibus feugiat at fermentum.</p>
+                <button id="contactUsButton">Contact Us</button>
+            </div>
+            <div class="image">
+                <img id="mainImage" src="images/digital-marketing-agency-in-chennai.png" alt="Digital Marketing Agency">
+            </div>
+        </div>
+
+        <div id="contactFormModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <form id="contactForm">
+                    <h2>Talk to us</h2>
+                    <label for="email">Work email*</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="firstName">First name*</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                    
+                    <label for="lastName">Last name*</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                    
+                    <div>
+                        <input type="checkbox" id="agreement" name="agreement" required>
+                        <label for="agreement">I agree to the terms and conditions, and provide consent to send me communication.</label>
+                    </div>
+                    
+                    <button type="submit">Contact Us</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="services-container">
+            <div class="service-content">
+                <h2>WHAT WE DO</h2>
+                <h1>SERVICES PROVIDE FOR YOU</h1>
+                <p>Morbi sed lacus nec risus finibus feugiat at fermentum nibh. Pellentesque vitae ante at elit fringilla acc at purus, Morbi sed lacus nec risus finibus feugiat at fermentum</p>
+            </div>
+            <div class="services-slider" id="servicesSlider">
+                <div class="service-slide">
+                    <img src="images/digital-marketing-new-startup-project-online-search-engine-optimisation-1920x1277.jpg" alt="Service 1">
+                </div>
+                <div class="service-slide">
+                    <img src="images/79bb6d_f5d61b3d0b3e44d48ebf7f777d22c2d9~mv2.webp" alt="Service 2">
+                </div>
+                <div class="service-slide">
+                    <img src="images/13-12-_-IH-Digital-Marketing.webp" alt="Service 3">
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button id="prevSlide">&lt;</button>
+                <button id="nextSlide">&gt;</button>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div class="image-section">
+                <img class="mainImage" src="images/digital-marketing-agency-in-chennai.png" alt="mainImage ">
+            </div>
+            <div class="content">
+                <div class="content-item active" onclick="changeImage('images/1_OV30bUgu2tisuJydQR9rxw.jpg', this)">
+                    <h3>What is a Digital Marketing Agency and How Do They Work?</h3>
+                    <p>Digital marketing is one of the most important resources any business can leverage. It ensures brands from all industries can connect with their target audience across various channels, from social media to email and search engines.</p>
+                    <p>Unfortunately, the digital marketing landscape is a complex and multifaceted space. Excelling in everything from search engine optimization to social media marketing requires consistent investment in developing new skills, methodologies, and techniques.</p>
+                    <p>Not every business has the internal resources requerts in the field bring the latest trends, tools, and techniques to your campaigns, ensuring higher efficiency and effectiveness.</p>
+                </div>
+                <div class="content-item active" onclick="changeImage('images/blink-random-technologies-naigaon-east-palghar-internet-website-developers-pxhjlie8h7.avif', this)">
+                    <h3>Innovative Solutions</h3>
+                    <p>Digital marketing agencies provide innovired to develop, manage, and run comprehensive digital marketing campaigns. That’s where digital marketing agencies come in.</p>
+                </div>
+                <div class="content-item" onclick="changeImage('images/blink-random-technologies-naigaon-east-palghar-internet-website-developers-pxhjlie8h7.avif', this)">
+                    <h3>Better Strategy & Quality</h3>
+                    <p>Utilizing a digital marketing agency allows for better strategy and quality. Expative solutions tailored to your business needs. They use advanced analytics and creative approaches to help you stand out in a competitive market.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="cards-container">
+            <div class="card">
+                <div class="icon">❤️</div>
+                <div class="number">199+</div>
+                <div class="label">Satisfied Customers</div>
+            </div>
+            <div class="card">
+                <div class="icon">⏰</div>
+                <div class="number">1591+</div>
+                <div class="label">Days Of Operation</div>
+            </div>
+            <div class="card">
+                <div class="icon">✔️</div>
+                <div class="number">283+</div>
+                <div class="label">Complete Projects</div>
+            </div>
+            <div class="card">
+                <div class="icon">🏆</div>
+                <div class="number">75+</div>
+                <div class="label">Win Awards</div>
+            </div>
+        </div>
+    </div>
+    <div class="feedback">
+        <h3>CLIENT FEEDBACK</h3>
+        <h2>What Our Clients Say</h2>
+        <p>"We are extremely happy with the service provided by the agency. They have helped us grow our business significantly."</p>
+        <p>- John Doe, CEO</p>
+    </div>
+
+    <div class="logos">
+        <img src="C:\Users\praka\OneDrive\Pictures\Saved Pictures\c037f842a55fd6af2343ef7ae1681cc2.jpg" alt="Logo 1"><b>HARRISON INDUSTRY</b>
+        <img src="C:\Users\praka\OneDrive\Pictures\Saved Pictures\images (1).png" alt="Logo 2"><B>DESIGN STUDIO</B>
+        <img src="C:\Users\praka\OneDrive\Pictures\Saved Pictures\images (2).png" alt="Logo 3"><B>DESIGN EXCLUSIVE</B>
+        <img src="C:\Users\praka\OneDrive\Pictures\Saved Pictures\download.jpg" alt="Logo 4"><B>FORT DEXON</B>
+        <img src="C:\Users\praka\OneDrive\Pictures\Saved Pictures\images (5).jpg" alt="Logo 4"><B>BARBECUE</B>
+        <img src="C:\Users\praka\OneDrive\Pictures\Saved Pictures\download (1).jpg" alt="Logo 4"><B>CALEY PEACE</B>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <h2>100+</h2>
+            <p>Clients Served</p>
+        </div>
+        <div class="stat">
+            <h2>200+</h2>
+            <p>Projects Delivered</p>
+        </div>
+        <div class="stat">
+            <h2>300+</h2>
+            <p>Happy Clients</p>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactUsButton = document.getElementById('contactUsButton');
+            const contactFormModal = document.getElementById('contactFormModal');
+            const closeButton = document.querySelector('.close-button');
+
+            contactUsButton.addEventListener('click', () => {
+                contactFormModal.style.display = 'block';
+            });
+
+            closeButton.addEventListener('click', () => {
+                contactFormModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === contactFormModal) {
+                    contactFormModal.style.display = 'none';
+                }
+            });
+
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                alert('Form submitted!');
+                contactFormModal.style.display = 'none';
+            });
+        });
+
+        const slider = document.getElementById('servicesSlider');
+        const prevButton = document.getElementById('prevSlide');
+        const nextButton = document.getElementById('nextSlide');
+
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.service-slide');
+            if (index >= slides.length) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = slides.length - 1;
+            } else {
+                currentSlide = index;
+            }
+            slider.style.transform = `translateX(${-currentSlide * 100}%)`;
+        }
+
+        prevButton.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+
+        nextButton.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 3000);
+
+        function changeImage(imageSrc, element) {
+            console.log("changing imagento:",imageSrc);
+            const mainImage = document.querySelector('.mainImage');
+            mainImage.src= imageSrc;    
+            const items = document.querySelectorAll('.content-item');
+            items.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
